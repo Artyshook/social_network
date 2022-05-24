@@ -1,0 +1,19 @@
+.nav {
+    grid-area: n;
+    background-color: white;
+
+}
+
+.item a {
+    color: darkorange;
+    text-decoration: none;
+}
+
+a:hover {
+    color: darkorange;
+    text-decoration: none;
+}
+
+a:focus {
+    color: sandybrown;
+}
