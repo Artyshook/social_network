@@ -6,6 +6,7 @@ import state, {PostsType} from "../Redux/state";
 
 export type PropsTypePosts ={
     postsData: PostsType[]
+    addPost: (postMessage: string) => void
 }
 
 // export type postsDataArray = {
@@ -19,7 +20,7 @@ export const Profile = (props: PropsTypePosts) => {
     return (
         <div>
             <ProfileInfo/>
-            <MyPosts postsData={props.postsData}/>
+            <MyPosts postsData={props.postsData}  addPost={props.addPost}/>
         </div>
     )
 

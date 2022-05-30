@@ -3,12 +3,13 @@ import './App.css';
 import {Dialogs} from "./components/Dialogs/Dialogs";
 import {BrowserRouter, HashRouter, Route} from "react-router-dom"
 import {Profile} from "./components/Profile/Profile";
-import {RootStateType} from "./components/Redux/state"
+import {addPost, PostsType, RootStateType} from "./components/Redux/state"
 import {Navbar} from "./components/NavBar/Navbar";
 import {Header} from "./components/Header/Header";
 
 type PropsType = {
     state: RootStateType
+    addPost: (postMessage: string) => void
 
 }
 
@@ -27,7 +28,7 @@ function App (props: PropsType) {
               <div className='app-wrapper-content'>
                   <Route path='/dialogs' render={()=> <Dialogs  dialogsData={dialogsData}
                                                                 messagesData={messagesData} />}/>
-                  <Route path='/profile' render={()=><Profile postsData={postsData}/>}/>
+                  <Route path='/profile' render={()=><Profile postsData={postsData} addPost={props.addPost}/>}/>
               </div>
           </div>
       </HashRouter>
