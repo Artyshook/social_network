@@ -2,11 +2,16 @@ import React from "react";
 import {MyPosts} from "./MyPosts/MyPosts";
 import ProfileInfo from "./ProfileInfo/ProfileInfo";
 import s from "./Profile.module.css"
-import state, {PostsType} from "../Redux/state";
+import state, {AddPostAT, PostsType, ProfilePageType, UpdateNewPostTextAT} from "../Redux/state";
 
 export type PropsTypePosts ={
-    postsData: PostsType[]
-    addPost: (postMessage: string) => void
+    profilePage: ProfilePageType
+    dispatch: (action: UpdateNewPostTextAT | AddPostAT )=> void
+
+
+    // addPost: (postMessage: string) => void
+    // UpdateNewPostText: (newText: string)=> void
+
 }
 
 // export type postsDataArray = {
@@ -17,10 +22,15 @@ export type PropsTypePosts ={
 
 export const Profile = (props: PropsTypePosts) => {
 
+
+
     return (
         <div>
             <ProfileInfo/>
-            <MyPosts postsData={props.postsData}  addPost={props.addPost}/>
+            <MyPosts postsData={props.profilePage.posts}
+                     newPostText={props.profilePage.newPosts}
+                     dispatch={props.dispatch}
+            />
         </div>
     )
 

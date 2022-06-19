@@ -3,22 +3,29 @@ import './App.css';
 import {Dialogs} from "./components/Dialogs/Dialogs";
 import {BrowserRouter, HashRouter, Route} from "react-router-dom"
 import {Profile} from "./components/Profile/Profile";
-import {addPost, PostsType, RootStateType} from "./components/Redux/state"
+import {
+    AddMessageAT,
+    AddPostAT,
+    RootStateType,
+    StoreType,
+    updateMessageAT,
+    UpdateNewPostTextAT
+} from "./components/Redux/state"
 import {Navbar} from "./components/NavBar/Navbar";
 import {Header} from "./components/Header/Header";
 
 type PropsType = {
-    state: RootStateType
-    addPost: (postMessage: string) => void
+    store: StoreType
+    dispatch: (action: UpdateNewPostTextAT | AddPostAT | AddMessageAT |  updateMessageAT)=> void
+
 
 }
 
 function App (props: PropsType) {
-
-    let dialogsData = props.state.dialogsPage.dialogs;
-    let messagesData = props.state.dialogsPage.messages;
-    let postsData = props.state.profilePage.posts;
-
+    let dialogsData = props.store._state.dialogsPage.dialogs;
+    let messagesData = props.store._state.dialogsPage
+    let postsData = props.store._state.profilePage;
+    let dispatch = props.dispatch
 
   return (
       <HashRouter>
@@ -27,8 +34,10 @@ function App (props: PropsType) {
               <Header/>
               <div className='app-wrapper-content'>
                   <Route path='/dialogs' render={()=> <Dialogs  dialogsData={dialogsData}
-                                                                messagesData={messagesData} />}/>
-                  <Route path='/profile' render={()=><Profile postsData={postsData} addPost={props.addPost}/>}/>
+                                                                messagesData={messagesData}
+                                                                dispatch={dispatch}
+                  />}/>
+                  <Route path='/profile' render={()=><Profile profilePage={postsData} dispatch={dispatch}/>}/>
               </div>
           </div>
       </HashRouter>
