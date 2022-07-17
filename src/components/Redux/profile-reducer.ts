@@ -8,8 +8,16 @@ export const updatePostsCreator = (newText: string):UpdateNewPostTextAT =>
 
 export const addPostCreator = (newPosts:string): AddPostAT => ({type: ADD_POST,  newPosts: newPosts})
 
+let initialState : ProfilePageType = {
+    posts: [
+        {id: 1, post: 'Hi how are you?', likesCount: 23},
+        {id: 2, post: 'First post here', likesCount: 1},
+        {id: 2, post: 'First post here', likesCount: 1}
+    ],
+        newPosts: "text"
+};
 
-export const profileReducer = (state: ProfilePageType, action:any) => {
+export const profileReducer = (state = initialState , action:any) => {
 
     switch (action.type) {
         case ADD_POST:

@@ -10,31 +10,31 @@ import state, {
     MessagesType,
     PostsType,
     ProfilePageType,
-    RootStateType, updateMessageAT, UpdateNewPostTextAT
+    RootStateType, StoreType, updateMessageAT, UpdateNewPostTextAT
 } from "../Redux/state";
 import {addMessageCreator, updateMessageCreator} from "../Redux/dialogs-reducer";
 
 type PropsType = {
+    addMessage: () => void
+    addNewMessage: (text: string) => void
     dialogsData: DialogsType[]
-    messagesData: DialogsPageType
-    dispatch: (action: UpdateNewPostTextAT | AddPostAT | AddMessageAT |  updateMessageAT)=> void
+    messagesData: MessagesType[]
 
 }
 
 export const Dialogs = (props:PropsType) => {
 
 let dialogsElements = props.dialogsData.map(d => <DialogItem id={d.id} name={d.name}/>);
-let messageElements = props.messagesData.messages.map(m => <Message message={m.message}/>);
+let messageElements = props.messagesData.map(m => <Message message={m.message}/>);
 
 const addMessageHandler = () => {
-    let newMessage = props.messagesData.newMessage
-    props.dispatch(addMessageCreator(newMessage))
+    props.addMessage();
 
 }
 
 const newMessageChangeHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
     let newTextMessage = e.currentTarget.value
-    props.dispatch(updateMessageCreator(newTextMessage))
+    props.addNewMessage(newTextMessage)
 }
 
     return (
