@@ -31,8 +31,10 @@ export const dialogsReducer = (state = initialState, action: any) => {
             message: action.newMessage
         }
 
-        state.messages.push(body);
+        let copySate = {...state, messages: [...state.messages] }
+        copySate.messages.push(body);
         state.newMessage = '';
+        return copySate
     }
 
     return state

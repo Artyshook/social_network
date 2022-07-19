@@ -15,35 +15,38 @@ import state, {
 import {addMessageCreator, updateMessageCreator} from "../Redux/dialogs-reducer";
 import {Dialogs} from "./Dialogs";
 import {AppRootStateType} from "../Redux/redux-store";
+import {useDispatch, useSelector} from "react-redux";
 
-type PropsType = {
-    // dialogsData: DialogsType[]
-    // messagesData: DialogsPageType
-    // dispatch: (action: UpdateNewPostTextAT | AddPostAT | AddMessageAT |  updateMessageAT)=> void
-    // store: StoreType
-    store: AppRootStateType
-    dispatch: (action: UpdateNewPostTextAT | AddPostAT | AddMessageAT |  updateMessageAT)=> void
-}
+// type PropsType = {
+//     // dialogsData: DialogsType[]
+//     // messagesData: DialogsPageType
+//     // dispatch: (action: UpdateNewPostTextAT | AddPostAT | AddMessageAT |  updateMessageAT)=> void
+//     // store: StoreType
+//     store: AppRootStateType
+//     dispatch: (action: UpdateNewPostTextAT | AddPostAT | AddMessageAT |  updateMessageAT)=> void
+// }
 
-export const DialogsContainer = (props: PropsType) => {
+export const DialogsContainer = () => {
 
+    const dispatch = useDispatch()
+    const dialogPage : DialogsPageType = useSelector<AppRootStateType, DialogsPageType>(state => state.dialogsPage)
 
-    let state = props.store;
+    // let state = props.store;
 
 
     const addMessageHandler = () => {
-        let newMessage = state.dialogsPage.newMessage
-        props.dispatch(addMessageCreator(newMessage))
+        let newMessage = dialogPage.newMessage
+        dispatch(addMessageCreator(newMessage))
 
     }
 
     const newMessageChangeHandler = (text: string) => {
-        props.dispatch(updateMessageCreator(text))
+        dispatch(updateMessageCreator(text))
     }
 
     return (
         <div className={s.dialogs}>
-           <Dialogs addMessage={addMessageHandler} addNewMessage={newMessageChangeHandler} dialogsData={state.dialogsPage.dialogs} messagesData={state.dialogsPage.messages}/>
+           <Dialogs addMessage={addMessageHandler} addNewMessage={newMessageChangeHandler} dialogsData={dialogPage.dialogs} messagesData={dialogPage.messages}/>
         </div>
     )
 

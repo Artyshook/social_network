@@ -3,36 +3,37 @@ import s from './MyPosts.module.css';
 import {Post} from "./Posts/Post";
 import {
     AddPostAT,
-    PostsType, StoreType,
+    PostsType, ProfilePageType, StoreType,
     UpdateNewPostTextAT
 } from "../../Redux/state";
 import {addPostCreator, updatePostsCreator} from "../../Redux/profile-reducer";
 import {MyPosts} from "./MyPosts";
 import {AppRootStateType} from "../../Redux/redux-store";
+import {DefaultRootState, useDispatch, useSelector} from "react-redux";
 
-type PropsTypePosts ={
+// type PropsTypePosts ={
+//
+//     store: AppRootStateType
+//     dispatch: (action: UpdateNewPostTextAT | AddPostAT )=> void
+// }
 
-    store: AppRootStateType
-    dispatch: (action: UpdateNewPostTextAT | AddPostAT )=> void
-}
+export const MyPostsContainer = () => {
 
-export const MyPostsContainer = (props: PropsTypePosts) => {
-
-    let state = props.store;
-
+    const dispatch = useDispatch()
+    const profilePage  = useSelector<AppRootStateType, ProfilePageType>(state => state.profilePage)
 
     let addPost = () => {
-    let text = props.store.profilePage.newPosts
-        props.dispatch(addPostCreator(text))
+    let text = profilePage.newPosts
+        dispatch(addPostCreator(text))
     }
 
     let onPostChange = (text:string ) => {
-        props.dispatch(updatePostsCreator(text))
+        dispatch(updatePostsCreator(text))
     }
 
     return (
         <div className={s.wrapper}>
-            <MyPosts updatePostsCreator={onPostChange} addPost={addPost} postsData={state.profilePage.posts} newPostText={state.profilePage.newPosts}/>
+            <MyPosts updatePostsCreator={onPostChange} addPost={addPost} postsData={profilePage.posts} newPostText={profilePage.newPosts}/>
         </div>
     )
 

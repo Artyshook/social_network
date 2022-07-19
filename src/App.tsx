@@ -17,18 +17,18 @@ import {DialogsContainer} from "./components/Dialogs/DialogsContainer";
 import {Store} from "redux";
 import {AppRootStateType} from "./components/Redux/redux-store";
 
-type PropsType = {
-    store: AppRootStateType
-    dispatch: (action: UpdateNewPostTextAT | AddPostAT | AddMessageAT |  updateMessageAT)=> void
+// type PropsType = {
+//     store: AppRootStateType
+//     dispatch: (action: UpdateNewPostTextAT | AddPostAT | AddMessageAT |  updateMessageAT)=> void
+//
+//
+// }
 
-
-}
-
-function App (props: PropsType) {
-    let dialogsData = props.store.dialogsPage.dialogs;
-    let messagesData = props.store.dialogsPage
-    let postsData = props.store.profilePage;
-    let dispatch = props.dispatch
+function App () {
+    // let dialogsData = props.store.dialogsPage.dialogs;
+    // let messagesData = props.store.dialogsPage
+    // let postsData = props.store.profilePage;
+    // let dispatch = props.dispatch
 
 
   return (
@@ -37,8 +37,8 @@ function App (props: PropsType) {
               <Navbar/>
               <Header/>
               <div className='app-wrapper-content'>
-                  <Route path='/dialogs' render={()=> <DialogsContainer  dispatch={dispatch} store={props.store}/>}/>
-                  <Route path='/profile' render={()=><Profile profilePage={postsData} dispatch={dispatch} store={props.store}/>}/>
+                  <Route path='/dialogs' render={()=> <DialogsContainer />}/>
+                  <Route path='/profile' render={()=> <Profile />}/>
               </div>
           </div>
       </HashRouter>
