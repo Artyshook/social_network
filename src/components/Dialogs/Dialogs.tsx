@@ -19,6 +19,7 @@ type PropsType = {
     addNewMessage: (text: string) => void
     dialogsData: DialogsType[]
     messagesData: MessagesType[]
+    newMessage: string
 
 }
 
@@ -46,6 +47,7 @@ const newMessageChangeHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
                 {messageElements}
                 <div><textarea
                     onChange={newMessageChangeHandler}
+                    value={props.newMessage}
                 />
                 </div>
 

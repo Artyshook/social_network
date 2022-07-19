@@ -1,4 +1,4 @@
-import {AddMessageAT, DialogsPageType, MessagesType, PostsType, StoreType, updateMessageAT} from "./state";
+import {AddMessageAT, DialogsPageType, updateMessageAT} from "./state";
 
 const ADD_NEW_MESSAGE_TEXT = "ADD-NEW-MESSAGE-TEXT"
 const UPDATE_NEW_MESSAGE_TEXT = "UPDATE-NEW-MESSAGE-TEXT"
@@ -23,19 +23,22 @@ let initialState : DialogsPageType = {
     newMessage: "text"
 }
 export const dialogsReducer = (state = initialState, action: any) => {
-    if (action.type === UPDATE_NEW_MESSAGE_TEXT) {
-        state.newMessage = action.newTextMessage;
-    } else if (action.type === ADD_NEW_MESSAGE_TEXT) {
-        let body: MessagesType = {
-            id: 111,
-            message: action.newMessage
+    switch (action.type) {
+        case UPDATE_NEW_MESSAGE_TEXT:
+           return {...state,
+               newMessage: action.newTextMessage
+           }
+        case ADD_NEW_MESSAGE_TEXT: {
+            // let body: MessagesType = {
+            //     id: 111,
+            //     message: action.newMessage
+            // }
+            return {
+                ...state,
+                newMessage: '',
+                messages: [...state.messages, {id: 111, message: action.newMessage}],
+            }
         }
-
-        let copySate = {...state, messages: [...state.messages] }
-        copySate.messages.push(body);
-        state.newMessage = '';
-        return copySate
     }
-
     return state
 }

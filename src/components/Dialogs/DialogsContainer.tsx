@@ -33,11 +33,13 @@ export const DialogsContainer = () => {
 
     // let state = props.store;
 
+    let newMessage = dialogPage.newMessage // How to fix it?
 
     const addMessageHandler = () => {
         let newMessage = dialogPage.newMessage
         dispatch(addMessageCreator(newMessage))
 
+        return newMessage
     }
 
     const newMessageChangeHandler = (text: string) => {
@@ -46,7 +48,7 @@ export const DialogsContainer = () => {
 
     return (
         <div className={s.dialogs}>
-           <Dialogs addMessage={addMessageHandler} addNewMessage={newMessageChangeHandler} dialogsData={dialogPage.dialogs} messagesData={dialogPage.messages}/>
+           <Dialogs addMessage={addMessageHandler} addNewMessage={newMessageChangeHandler} dialogsData={dialogPage.dialogs} messagesData={dialogPage.messages} newMessage={newMessage}/>
         </div>
     )
 
